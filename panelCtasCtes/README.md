@@ -1,7 +1,19 @@
-# Panel Ctas Ctes 2026
+# Panel Ctas Ctes 2026 · v2.0
 
 Aplicación web de una sola página para gestionar **cuentas corrientes** de clientes
 (Ctas Ctes SC). Funciona sin conexión y sin servidor: abrís el archivo y listo.
+
+## Novedades v2.0
+
+- **Editar movimientos** (antes solo se podían borrar).
+- **Configuración** (⚙️): nombre del negocio, subtítulo, iniciales del logo y símbolo de moneda.
+- **Tema claro / oscuro** con un clic (🌙 / ☀️), se recuerda.
+- **Filtros** de clientes: todos, con deuda, a favor, saldados.
+- **Ordenar** por nombre o por mayor deuda.
+- **Totales** de cargos y pagos por cliente, con fila de totales en la tabla.
+- **Límite de crédito** por cliente con alerta ⚠️ cuando se supera.
+- **Exportar a CSV** el estado de cuenta de un cliente (abre en Excel).
+- Encabezado del negocio al **imprimir** el estado de cuenta.
 
 ## Cómo usarlo
 

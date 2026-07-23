@@ -1,152 +1,127 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Panel Ctas Ctes 2026</title>
+<title>Panel Ctas Ctes 2026 · v2.0</title>
 <style>
   :root {
-    --bg: #0f172a;
-    --panel: #1e293b;
-    --panel-2: #273449;
-    --border: #334155;
-    --text: #e2e8f0;
-    --muted: #94a3b8;
-    --accent: #38bdf8;
-    --accent-strong: #0ea5e9;
-    --debe: #f87171;   /* cargos / deuda */
-    --haber: #4ade80;  /* pagos */
-    --warn: #fbbf24;
+    --bg: #0f172a; --bg-grad-a:#0b1220; --bg-grad-b:#0f172a; --bg-grad-c:#131c30;
+    --panel: #1e293b; --panel-2: #273449; --border: #334155;
+    --text: #e2e8f0; --muted: #94a3b8;
+    --accent: #38bdf8; --accent-strong: #0ea5e9;
+    --debe: #f87171; --haber: #4ade80; --warn: #fbbf24;
+    --field-bg: #0f172a;
     --shadow: 0 10px 30px rgba(0,0,0,.35);
+  }
+  html[data-theme="light"] {
+    --bg: #eef2f7; --bg-grad-a:#eef3f9; --bg-grad-b:#e6ecf5; --bg-grad-c:#dfe7f2;
+    --panel: #ffffff; --panel-2: #f1f5f9; --border: #d5deea;
+    --text: #0f172a; --muted: #5a6b82;
+    --accent: #0284c7; --accent-strong: #0369a1;
+    --debe: #dc2626; --haber: #16a34a; --warn: #d97706;
+    --field-bg: #ffffff;
+    --shadow: 0 8px 24px rgba(30,58,90,.12);
   }
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; }
   body {
     font-family: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
-    background: linear-gradient(160deg, #0b1220, #0f172a 40%, #131c30);
-    color: var(--text);
-    min-height: 100vh;
-    -webkit-font-smoothing: antialiased;
+    background: linear-gradient(160deg, var(--bg-grad-a), var(--bg-grad-b) 40%, var(--bg-grad-c));
+    color: var(--text); min-height: 100vh; -webkit-font-smoothing: antialiased;
   }
   header.app {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    padding: 18px 26px;
-    background: rgba(15,23,42,.85);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--border);
-    position: sticky;
-    top: 0;
-    z-index: 20;
-    flex-wrap: wrap;
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    padding: 16px 26px; background: color-mix(in srgb, var(--bg) 85%, transparent);
+    backdrop-filter: blur(8px); border-bottom: 1px solid var(--border);
+    position: sticky; top: 0; z-index: 20; flex-wrap: wrap;
   }
   .brand { display: flex; align-items: center; gap: 14px; }
   .brand .logo {
-    width: 46px; height: 46px; border-radius: 12px;
-    display: grid; place-items: center;
+    width: 46px; height: 46px; border-radius: 12px; display: grid; place-items: center;
     background: linear-gradient(135deg, var(--accent), var(--accent-strong));
-    color: #04283a; font-weight: 800; font-size: 20px;
-    box-shadow: 0 4px 14px rgba(14,165,233,.4);
+    color: #04283a; font-weight: 800; font-size: 20px; box-shadow: 0 4px 14px rgba(14,165,233,.4);
   }
-  .brand h1 { font-size: 20px; margin: 0; letter-spacing: .3px; }
+  .brand h1 { font-size: 20px; margin: 0; letter-spacing: .3px; display:flex; align-items:center; gap:8px; }
+  .brand .ver { font-size: 11px; font-weight: 700; color:#04283a; background: var(--warn); padding:2px 7px; border-radius:999px; }
   .brand small { color: var(--muted); font-size: 12px; }
   .toolbar { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
 
   button, .btn {
     font: inherit; cursor: pointer; border: 1px solid var(--border);
-    background: var(--panel-2); color: var(--text);
-    padding: 9px 14px; border-radius: 10px; transition: .15s;
-    display: inline-flex; align-items: center; gap: 7px; white-space: nowrap;
+    background: var(--panel-2); color: var(--text); padding: 9px 14px; border-radius: 10px;
+    transition: .15s; display: inline-flex; align-items: center; gap: 7px; white-space: nowrap;
   }
   button:hover, .btn:hover { border-color: var(--accent); transform: translateY(-1px); }
   button.primary { background: linear-gradient(135deg, var(--accent), var(--accent-strong)); border: none; color: #04283a; font-weight: 700; }
   button.ghost { background: transparent; }
   button.danger { color: #fecaca; border-color: #7f1d1d; background: #3b1414; }
+  html[data-theme="light"] button.danger { color:#b91c1c; background:#fee2e2; border-color:#fca5a5; }
   button.danger:hover { border-color: var(--debe); }
   button.small { padding: 5px 9px; font-size: 12px; border-radius: 8px; }
+  button.icon { padding: 9px 11px; }
 
-  main { max-width: 1200px; margin: 0 auto; padding: 22px 20px 60px; }
+  main { max-width: 1220px; margin: 0 auto; padding: 22px 20px 60px; }
 
-  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px,1fr)); gap: 14px; margin-bottom: 22px; }
-  .card {
-    background: var(--panel); border: 1px solid var(--border); border-radius: 16px;
-    padding: 16px 18px; box-shadow: var(--shadow); position: relative; overflow: hidden;
-  }
-  .card::after { content:""; position:absolute; right:-30px; top:-30px; width:90px; height:90px; border-radius:50%; background: rgba(56,189,248,.08); }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 14px; margin-bottom: 22px; }
+  .card { background: var(--panel); border: 1px solid var(--border); border-radius: 16px; padding: 16px 18px; box-shadow: var(--shadow); position: relative; overflow: hidden; }
+  .card::after { content:""; position:absolute; right:-30px; top:-30px; width:90px; height:90px; border-radius:50%; background: color-mix(in srgb, var(--accent) 10%, transparent); }
   .card .label { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .6px; }
-  .card .value { font-size: 26px; font-weight: 800; margin-top: 6px; }
-  .card .value.debe { color: var(--debe); }
-  .card .value.haber { color: var(--haber); }
-  .card .value.accent { color: var(--accent); }
+  .card .value { font-size: 25px; font-weight: 800; margin-top: 6px; }
+  .card .value.debe { color: var(--debe); } .card .value.haber { color: var(--haber); } .card .value.accent { color: var(--accent); }
 
-  .layout { display: grid; grid-template-columns: 340px 1fr; gap: 20px; align-items: start; }
+  .layout { display: grid; grid-template-columns: 350px 1fr; gap: 20px; align-items: start; }
   @media (max-width: 900px) { .layout { grid-template-columns: 1fr; } }
 
-  .panel {
-    background: var(--panel); border: 1px solid var(--border); border-radius: 16px;
-    box-shadow: var(--shadow); overflow: hidden;
-  }
-  .panel > .head {
-    padding: 14px 16px; border-bottom: 1px solid var(--border);
-    display: flex; align-items: center; justify-content: space-between; gap: 10px;
-  }
+  .panel { background: var(--panel); border: 1px solid var(--border); border-radius: 16px; box-shadow: var(--shadow); overflow: hidden; }
+  .panel > .head { padding: 14px 16px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 10px; }
   .panel > .head h2 { font-size: 15px; margin: 0; }
   .panel > .body { padding: 12px 14px; }
 
-  .search { width: 100%; padding: 9px 12px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg); color: var(--text); margin-bottom: 10px; }
+  .search { width: 100%; padding: 9px 12px; border-radius: 10px; border: 1px solid var(--border); background: var(--field-bg); color: var(--text); margin-bottom: 10px; }
   .search:focus { outline: none; border-color: var(--accent); }
+  .filtros { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px; }
+  .chip { font-size:12px; padding:5px 10px; border-radius:999px; border:1px solid var(--border); background:var(--field-bg); cursor:pointer; color:var(--muted); }
+  .chip.on { background: color-mix(in srgb, var(--accent) 18%, transparent); color: var(--accent); border-color: var(--accent); font-weight:700; }
 
-  ul.clientes { list-style: none; margin: 0; padding: 0; max-height: 62vh; overflow-y: auto; }
-  ul.clientes li {
-    padding: 11px 12px; border-radius: 11px; cursor: pointer;
-    display: flex; align-items: center; justify-content: space-between; gap: 8px;
-    border: 1px solid transparent; margin-bottom: 4px;
-  }
+  ul.clientes { list-style: none; margin: 0; padding: 0; max-height: 60vh; overflow-y: auto; }
+  ul.clientes li { padding: 11px 12px; border-radius: 11px; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 8px; border: 1px solid transparent; margin-bottom: 4px; }
   ul.clientes li:hover { background: var(--panel-2); }
   ul.clientes li.active { background: var(--panel-2); border-color: var(--accent); }
   ul.clientes li .nom { font-weight: 600; }
   ul.clientes li .sub { font-size: 11px; color: var(--muted); }
-  .saldo-pill { font-size: 13px; font-weight: 700; padding: 3px 9px; border-radius: 999px; background: #1f2937; }
-  .saldo-pill.pos { color: var(--debe); background: rgba(248,113,113,.12); }
-  .saldo-pill.neg { color: var(--haber); background: rgba(74,222,128,.12); }
+  .saldo-pill { font-size: 13px; font-weight: 700; padding: 3px 9px; border-radius: 999px; background: color-mix(in srgb, var(--muted) 15%, transparent); }
+  .saldo-pill.pos { color: var(--debe); background: color-mix(in srgb, var(--debe) 14%, transparent); }
+  .saldo-pill.neg { color: var(--haber); background: color-mix(in srgb, var(--haber) 14%, transparent); }
   .saldo-pill.zero { color: var(--muted); }
 
   table { width: 100%; border-collapse: collapse; font-size: 14px; }
   thead th { text-align: left; color: var(--muted); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: .5px; padding: 8px 10px; border-bottom: 1px solid var(--border); }
-  tbody td { padding: 9px 10px; border-bottom: 1px solid rgba(51,65,85,.5); }
-  tbody tr:hover { background: rgba(39,52,73,.4); }
+  tbody td { padding: 9px 10px; border-bottom: 1px solid color-mix(in srgb, var(--border) 60%, transparent); }
+  tbody tr:hover { background: color-mix(in srgb, var(--panel-2) 55%, transparent); }
   td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
-  td.debe { color: var(--debe); }
-  td.haber { color: var(--haber); }
-  td.saldo { font-weight: 700; }
+  td.debe { color: var(--debe); } td.haber { color: var(--haber); } td.saldo { font-weight: 700; }
+  .acciones-mov { display:flex; gap:4px; justify-content:flex-end; }
 
   .empty { text-align: center; color: var(--muted); padding: 40px 16px; }
   .empty .big { font-size: 38px; opacity: .5; }
 
-  /* modal */
   .modal-bg { position: fixed; inset: 0; background: rgba(2,6,23,.7); display: none; align-items: center; justify-content: center; z-index: 50; padding: 16px; }
   .modal-bg.show { display: flex; }
-  .modal {
-    background: var(--panel); border: 1px solid var(--border); border-radius: 18px;
-    width: 100%; max-width: 460px; box-shadow: var(--shadow); animation: pop .18s ease;
-  }
+  .modal { background: var(--panel); border: 1px solid var(--border); border-radius: 18px; width: 100%; max-width: 460px; box-shadow: var(--shadow); animation: pop .18s ease; }
   @keyframes pop { from { transform: scale(.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
   .modal .m-head { padding: 16px 18px; border-bottom: 1px solid var(--border); display:flex; justify-content: space-between; align-items:center; }
   .modal .m-head h3 { margin: 0; font-size: 16px; }
   .modal .m-body { padding: 18px; display: grid; gap: 12px; }
   .modal .m-foot { padding: 14px 18px; border-top: 1px solid var(--border); display: flex; justify-content: flex-end; gap: 10px; }
   label.field { display: grid; gap: 5px; font-size: 12px; color: var(--muted); }
-  label.field input, label.field select, label.field textarea {
-    padding: 10px 12px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg); color: var(--text); font: inherit;
-  }
+  label.field input, label.field select, label.field textarea { padding: 10px 12px; border-radius: 10px; border: 1px solid var(--border); background: var(--field-bg); color: var(--text); font: inherit; }
   label.field input:focus, label.field select:focus, label.field textarea:focus { outline: none; border-color: var(--accent); }
   .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
   .seg { display: flex; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
-  .seg button { flex: 1; border: none; border-radius: 0; background: var(--bg); }
-  .seg button.on-debe { background: rgba(248,113,113,.18); color: var(--debe); font-weight: 700; }
-  .seg button.on-haber { background: rgba(74,222,128,.18); color: var(--haber); font-weight: 700; }
+  .seg button { flex: 1; border: none; border-radius: 0; background: var(--field-bg); }
+  .seg button.on-debe { background: color-mix(in srgb, var(--debe) 20%, transparent); color: var(--debe); font-weight: 700; }
+  .seg button.on-haber { background: color-mix(in srgb, var(--haber) 20%, transparent); color: var(--haber); font-weight: 700; }
 
   .client-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
   .client-head .info h2 { margin: 0 0 4px; }
@@ -155,65 +130,74 @@
   .big-saldo .lbl { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: .5px; }
   .big-saldo .amt { font-size: 28px; font-weight: 800; }
   .amt.pos { color: var(--debe); } .amt.neg { color: var(--haber); } .amt.zero { color: var(--muted); }
+  .mini-cards { display:flex; gap:10px; flex-wrap:wrap; margin:14px 0; }
+  .mini { background:var(--panel-2); border:1px solid var(--border); border-radius:12px; padding:8px 14px; font-size:13px; }
+  .mini b { display:block; font-size:16px; margin-top:2px; }
 
   .movs-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+  .print-header { display:none; }
   footer.app { text-align: center; color: var(--muted); font-size: 12px; padding: 20px; }
   .hint { font-size: 11px; color: var(--muted); }
   ::-webkit-scrollbar { width: 10px; height: 10px; }
-  ::-webkit-scrollbar-thumb { background: #33415580; border-radius: 8px; }
+  ::-webkit-scrollbar-thumb { background: color-mix(in srgb, var(--border) 70%, transparent); border-radius: 8px; }
 
   @media print {
     body { background: #fff; color: #000; }
-    header.app, .toolbar, .cards, .panel.lista, .movs-actions, footer.app, button { display: none !important; }
-    .layout { grid-template-columns: 1fr; }
-    .panel { border: none; box-shadow: none; }
+    header.app, .toolbar, .cards, .panel.lista, .movs-actions, footer.app, button, .filtros { display: none !important; }
+    .layout { grid-template-columns: 1fr; } .panel { border: none; box-shadow: none; }
     td, th { color: #000 !important; }
     td.debe { color: #b91c1c !important; } td.haber { color: #15803d !important; }
+    .print-header { display:block; margin-bottom:16px; border-bottom:2px solid #000; padding-bottom:10px; }
+    .print-header h1 { margin:0; font-size:22px; } .print-header .sub { color:#333; font-size:13px; }
   }
 </style>
 </head>
 <body>
 <header class="app">
   <div class="brand">
-    <div class="logo">CC</div>
+    <div class="logo" id="logoBox">CC</div>
     <div>
-      <h1>Panel Ctas Ctes <span id="anio">2026</span></h1>
-      <small>Gestión de cuentas corrientes · Ctas Ctes SC</small>
+      <h1><span id="tituloNegocio">Panel Ctas Ctes</span> <span id="anio">2026</span> <span class="ver">v2.0</span></h1>
+      <small id="subNegocio">Gestión de cuentas corrientes · Ctas Ctes SC</small>
     </div>
   </div>
   <div class="toolbar">
     <button class="primary" onclick="abrirModalCliente()">＋ Nuevo cliente</button>
     <button class="ghost" onclick="exportar()" title="Descargar copia de seguridad (JSON)">⭳ Backup</button>
     <button class="ghost" onclick="document.getElementById('importFile').click()" title="Restaurar desde archivo">⭱ Importar</button>
+    <button class="ghost icon" onclick="abrirConfig()" title="Configuración">⚙️</button>
+    <button class="ghost icon" onclick="toggleTema()" title="Cambiar tema" id="btnTema">🌙</button>
     <input type="file" id="importFile" accept="application/json" style="display:none" onchange="importar(event)">
   </div>
 </header>
 
 <main>
   <section class="cards" id="cards"></section>
-
   <div class="layout">
-    <!-- Lista de clientes -->
     <section class="panel lista">
-      <div class="head">
-        <h2>Clientes</h2>
-        <span class="hint" id="countClientes"></span>
-      </div>
+      <div class="head"><h2>Clientes</h2><span class="hint" id="countClientes"></span></div>
       <div class="body">
         <input class="search" id="buscar" placeholder="🔍 Buscar cliente..." oninput="renderClientes()">
+        <div class="filtros" id="filtros">
+          <span class="chip on" data-f="todos" onclick="setFiltro('todos')">Todos</span>
+          <span class="chip" data-f="deuda" onclick="setFiltro('deuda')">Con deuda</span>
+          <span class="chip" data-f="favor" onclick="setFiltro('favor')">A favor</span>
+          <span class="chip" data-f="saldados" onclick="setFiltro('saldados')">Saldados</span>
+        </div>
+        <div class="filtros">
+          <span class="hint" style="align-self:center">Ordenar:</span>
+          <span class="chip on" data-o="nombre" onclick="setOrden('nombre')">Nombre</span>
+          <span class="chip" data-o="saldo" onclick="setOrden('saldo')">Mayor deuda</span>
+        </div>
         <ul class="clientes" id="listaClientes"></ul>
       </div>
     </section>
-
-    <!-- Detalle / movimientos -->
-    <section class="panel" id="detallePanel">
-      <div class="body" id="detalle"></div>
-    </section>
+    <section class="panel" id="detallePanel"><div class="body" id="detalle"></div></section>
   </div>
 </main>
 
 <footer class="app">
-  Los datos se guardan localmente en este navegador. Usá <b>Backup</b> con frecuencia para no perder información.
+  Panel Ctas Ctes 2026 · v2.0 — Los datos se guardan localmente en este navegador. Usá <b>Backup</b> con frecuencia.
 </footer>
 
 <!-- Modal Cliente -->
@@ -221,52 +205,53 @@
   <div class="modal">
     <div class="m-head"><h3 id="tituloCliente">Nuevo cliente</h3><button class="ghost small" onclick="cerrar('modalCliente')">✕</button></div>
     <div class="m-body">
-      <label class="field">Nombre / Razón social *
-        <input id="cNombre" placeholder="Ej: Juan Pérez">
-      </label>
+      <label class="field">Nombre / Razón social *<input id="cNombre" placeholder="Ej: Juan Pérez"></label>
       <div class="row2">
-        <label class="field">Teléfono
-          <input id="cTel" placeholder="Opcional">
-        </label>
-        <label class="field">Localidad
-          <input id="cLoc" placeholder="Opcional">
-        </label>
+        <label class="field">Teléfono<input id="cTel" placeholder="Opcional"></label>
+        <label class="field">Localidad<input id="cLoc" placeholder="Opcional"></label>
       </div>
-      <label class="field">Notas
-        <textarea id="cNotas" rows="2" placeholder="Opcional"></textarea>
-      </label>
+      <label class="field">Límite de crédito (alerta)<input type="number" id="cLimite" step="0.01" min="0" placeholder="Opcional"></label>
+      <label class="field">Notas<textarea id="cNotas" rows="2" placeholder="Opcional"></textarea></label>
     </div>
-    <div class="m-foot">
-      <button class="ghost" onclick="cerrar('modalCliente')">Cancelar</button>
-      <button class="primary" onclick="guardarCliente()">Guardar</button>
-    </div>
+    <div class="m-foot"><button class="ghost" onclick="cerrar('modalCliente')">Cancelar</button><button class="primary" onclick="guardarCliente()">Guardar</button></div>
   </div>
 </div>
 
 <!-- Modal Movimiento -->
 <div class="modal-bg" id="modalMov">
   <div class="modal">
-    <div class="m-head"><h3>Nuevo movimiento</h3><button class="ghost small" onclick="cerrar('modalMov')">✕</button></div>
+    <div class="m-head"><h3 id="tituloMov">Nuevo movimiento</h3><button class="ghost small" onclick="cerrar('modalMov')">✕</button></div>
     <div class="m-body">
       <div class="seg" id="segTipo">
         <button type="button" id="btnDebe" onclick="setTipo('debe')">＋ Cargo (Debe)</button>
         <button type="button" id="btnHaber" onclick="setTipo('haber')">− Pago (Haber)</button>
       </div>
       <div class="row2">
-        <label class="field">Fecha
-          <input type="date" id="mFecha">
-        </label>
-        <label class="field">Importe *
-          <input type="number" id="mImporte" step="0.01" min="0" placeholder="0.00">
-        </label>
+        <label class="field">Fecha<input type="date" id="mFecha"></label>
+        <label class="field">Importe *<input type="number" id="mImporte" step="0.01" min="0" placeholder="0.00"></label>
       </div>
-      <label class="field">Concepto
-        <input id="mConcepto" placeholder="Ej: Factura A-0001 / Pago en efectivo">
-      </label>
+      <label class="field">Concepto<input id="mConcepto" placeholder="Ej: Factura A-0001 / Pago en efectivo"></label>
+    </div>
+    <div class="m-foot"><button class="ghost" onclick="cerrar('modalMov')">Cancelar</button><button class="primary" onclick="guardarMov()">Guardar</button></div>
+  </div>
+</div>
+
+<!-- Modal Configuración -->
+<div class="modal-bg" id="modalConfig">
+  <div class="modal">
+    <div class="m-head"><h3>Configuración</h3><button class="ghost small" onclick="cerrar('modalConfig')">✕</button></div>
+    <div class="m-body">
+      <label class="field">Nombre del negocio (título)<input id="gTitulo" placeholder="Panel Ctas Ctes"></label>
+      <label class="field">Subtítulo<input id="gSub" placeholder="Gestión de cuentas corrientes · Ctas Ctes SC"></label>
+      <div class="row2">
+        <label class="field">Iniciales del logo<input id="gLogo" maxlength="3" placeholder="CC"></label>
+        <label class="field">Símbolo de moneda<input id="gMoneda" maxlength="4" placeholder="$"></label>
+      </div>
+      <p class="hint">La moneda solo cambia el símbolo mostrado; no convierte importes.</p>
     </div>
     <div class="m-foot">
-      <button class="ghost" onclick="cerrar('modalMov')">Cancelar</button>
-      <button class="primary" onclick="guardarMov()">Registrar</button>
+      <button class="danger" onclick="borrarTodo()">Borrar todos los datos</button>
+      <button class="primary" onclick="guardarConfig()">Guardar</button>
     </div>
   </div>
 </div>
@@ -275,15 +260,25 @@
 /* ====================== Estado y persistencia ====================== */
 const KEY = "panelCtasCtes2026";
 let db = cargar();
-let clienteSel = null;
-let tipoMov = "debe";
+let clienteSel = null, tipoMov = "debe", filtro = "todos", orden = "nombre", editandoCliente = null, editandoMov = null;
 
+function estadoInicial() {
+  return { version: 2, config: { titulo: "Panel Ctas Ctes", sub: "Gestión de cuentas corrientes · Ctas Ctes SC", logo: "CC", moneda: "$", tema: "dark" }, clientes: [] };
+}
 function cargar() {
   try {
     const raw = localStorage.getItem(KEY);
-    if (raw) return JSON.parse(raw);
+    if (raw) { const d = JSON.parse(raw); return migrar(d); }
   } catch (e) { console.warn("No se pudo leer localStorage", e); }
-  return { clientes: [] };
+  return estadoInicial();
+}
+function migrar(d) {
+  const base = estadoInicial();
+  if (!d.config) d.config = base.config;
+  else d.config = Object.assign({}, base.config, d.config);
+  if (!Array.isArray(d.clientes)) d.clientes = [];
+  d.version = 2;
+  return d;
 }
 function guardar() {
   try { localStorage.setItem(KEY, JSON.stringify(db)); }
@@ -292,79 +287,74 @@ function guardar() {
 function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 7); }
 
 /* ====================== Utilidades ====================== */
-const fmt = new Intl.NumberFormat("es-AR", { style: "currency", currency: "ARS", minimumFractionDigits: 2 });
-function money(n) { return fmt.format(n || 0); }
-function hoy() { return new Date().toISOString().slice(0, 10); }
-function fechaCorta(iso) {
-  if (!iso) return "";
-  const [y, m, d] = iso.split("-");
-  return `${d}/${m}/${y}`;
+function money(n) {
+  const s = new Intl.NumberFormat("es-AR", { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(Math.abs(n || 0));
+  const sign = (n || 0) < -0.005 ? "-" : "";
+  return `${sign}${db.config.moneda || "$"} ${s}`;
 }
-function saldoCliente(c) {
-  return (c.movs || []).reduce((s, m) => s + (m.tipo === "debe" ? m.importe : -m.importe), 0);
+function hoy() { return new Date().toISOString().slice(0, 10); }
+function fechaCorta(iso) { if (!iso) return ""; const [y, m, d] = iso.split("-"); return `${d}/${m}/${y}`; }
+function saldoCliente(c) { return (c.movs || []).reduce((s, m) => s + (m.tipo === "debe" ? m.importe : -m.importe), 0); }
+function totales(c) {
+  let debe = 0, haber = 0;
+  (c.movs || []).forEach(m => { if (m.tipo === "debe") debe += m.importe; else haber += m.importe; });
+  return { debe, haber, saldo: debe - haber };
 }
 function claseSaldo(s) { return s > 0.005 ? "pos" : (s < -0.005 ? "neg" : "zero"); }
+function movsOrdenados(c) { return [...(c.movs || [])].sort((a, b) => (a.fecha || "").localeCompare(b.fecha || "") || (a.orden - b.orden)); }
 
 /* ====================== Tarjetas resumen ====================== */
 function renderCards() {
   const totalClientes = db.clientes.length;
   let porCobrar = 0, aFavor = 0, conDeuda = 0;
-  db.clientes.forEach(c => {
-    const s = saldoCliente(c);
-    if (s > 0.005) { porCobrar += s; conDeuda++; }
-    else if (s < -0.005) { aFavor += -s; }
-  });
+  db.clientes.forEach(c => { const s = saldoCliente(c); if (s > 0.005) { porCobrar += s; conDeuda++; } else if (s < -0.005) aFavor += -s; });
   const cards = [
     { label: "Clientes", value: totalClientes, cls: "accent" },
     { label: "Total a cobrar", value: money(porCobrar), cls: "debe" },
     { label: "Con deuda", value: conDeuda, cls: "" },
     { label: "Saldo a favor (clientes)", value: money(aFavor), cls: "haber" },
   ];
-  document.getElementById("cards").innerHTML = cards.map(c =>
-    `<div class="card"><div class="label">${c.label}</div><div class="value ${c.cls}">${c.value}</div></div>`
-  ).join("");
+  document.getElementById("cards").innerHTML = cards.map(c => `<div class="card"><div class="label">${c.label}</div><div class="value ${c.cls}">${c.value}</div></div>`).join("");
 }
 
 /* ====================== Lista de clientes ====================== */
+function setFiltro(f) { filtro = f; document.querySelectorAll('[data-f]').forEach(ch => ch.classList.toggle('on', ch.dataset.f === f)); renderClientes(); }
+function setOrden(o) { orden = o; document.querySelectorAll('[data-o]').forEach(ch => ch.classList.toggle('on', ch.dataset.o === o)); renderClientes(); }
+
 function renderClientes() {
   const q = (document.getElementById("buscar").value || "").toLowerCase().trim();
   const lista = document.getElementById("listaClientes");
-  let items = [...db.clientes];
-  if (q) items = items.filter(c => (c.nombre + " " + (c.localidad || "")).toLowerCase().includes(q));
-  items.sort((a, b) => a.nombre.localeCompare(b.nombre, "es"));
+  let items = db.clientes.map(c => ({ c, s: saldoCliente(c) }));
+  if (q) items = items.filter(x => (x.c.nombre + " " + (x.c.localidad || "")).toLowerCase().includes(q));
+  if (filtro === "deuda") items = items.filter(x => x.s > 0.005);
+  else if (filtro === "favor") items = items.filter(x => x.s < -0.005);
+  else if (filtro === "saldados") items = items.filter(x => Math.abs(x.s) <= 0.005);
+  if (orden === "saldo") items.sort((a, b) => b.s - a.s);
+  else items.sort((a, b) => a.c.nombre.localeCompare(b.c.nombre, "es"));
 
   document.getElementById("countClientes").textContent = `${db.clientes.length} en total`;
-
   if (items.length === 0) {
     lista.innerHTML = `<div class="empty"><div class="big">👥</div>${db.clientes.length ? "Sin resultados" : "Todavía no hay clientes.<br>Creá el primero."}</div>`;
     return;
   }
-  lista.innerHTML = items.map(c => {
-    const s = saldoCliente(c);
-    const cls = claseSaldo(s);
-    const activo = clienteSel === c.id ? "active" : "";
+  lista.innerHTML = items.map(({ c, s }) => {
+    const cls = claseSaldo(s), activo = clienteSel === c.id ? "active" : "";
+    const alerta = c.limite > 0 && s > c.limite ? ' ⚠️' : '';
     return `<li class="${activo}" onclick="seleccionar('${c.id}')">
-      <div><div class="nom">${escapeHtml(c.nombre)}</div>
-      <div class="sub">${escapeHtml(c.localidad || "")} ${c.tel ? "· " + escapeHtml(c.tel) : ""}</div></div>
-      <span class="saldo-pill ${cls}">${money(s)}</span>
-    </li>`;
+      <div><div class="nom">${escapeHtml(c.nombre)}${alerta}</div>
+      <div class="sub">${escapeHtml(c.localidad || "")}${c.tel ? " · " + escapeHtml(c.tel) : ""}</div></div>
+      <span class="saldo-pill ${cls}">${money(s)}</span></li>`;
   }).join("");
 }
 
 /* ====================== Detalle de cliente ====================== */
 function seleccionar(id) { clienteSel = id; render(); }
-
 function renderDetalle() {
   const cont = document.getElementById("detalle");
   const c = db.clientes.find(x => x.id === clienteSel);
-  if (!c) {
-    cont.innerHTML = `<div class="empty"><div class="big">🧾</div>Seleccioná un cliente para ver su cuenta corriente.</div>`;
-    return;
-  }
-  const movs = [...(c.movs || [])].sort((a, b) => (a.fecha || "").localeCompare(b.fecha || "") || a.orden - b.orden);
-  const saldo = saldoCliente(c);
-  const cls = claseSaldo(saldo);
-
+  if (!c) { cont.innerHTML = `<div class="empty"><div class="big">🧾</div>Seleccioná un cliente para ver su cuenta corriente.</div>`; return; }
+  const movs = movsOrdenados(c);
+  const t = totales(c), cls = claseSaldo(t.saldo);
   let acumulado = 0;
   const filas = movs.map(m => {
     acumulado += (m.tipo === "debe" ? m.importe : -m.importe);
@@ -374,11 +364,19 @@ function renderDetalle() {
       <td class="num debe">${m.tipo === "debe" ? money(m.importe) : ""}</td>
       <td class="num haber">${m.tipo === "haber" ? money(m.importe) : ""}</td>
       <td class="num saldo ${claseSaldo(acumulado)}">${money(acumulado)}</td>
-      <td class="num"><button class="small danger" onclick="borrarMov('${m.id}')" title="Eliminar">✕</button></td>
-    </tr>`;
+      <td class="num"><div class="acciones-mov">
+        <button class="small ghost" onclick="editarMov('${m.id}')" title="Editar">✎</button>
+        <button class="small danger" onclick="borrarMov('${m.id}')" title="Eliminar">✕</button>
+      </div></td></tr>`;
   }).join("");
+  const alerta = c.limite > 0 && t.saldo > c.limite
+    ? `<div class="hint" style="color:var(--warn);margin-top:6px">⚠️ Supera el límite de crédito (${money(c.limite)}).</div>` : "";
 
   cont.innerHTML = `
+    <div class="print-header">
+      <h1>${escapeHtml(db.config.titulo)} — Estado de cuenta</h1>
+      <div class="sub">${escapeHtml(db.config.sub)} · Emitido: ${fechaCorta(hoy())}</div>
+    </div>
     <div class="client-head">
       <div class="info">
         <h2>${escapeHtml(c.nombre)}</h2>
@@ -388,39 +386,40 @@ function renderDetalle() {
           <span>🧾 ${movs.length} movimiento${movs.length === 1 ? "" : "s"}</span>
         </div>
         ${c.notas ? `<div class="hint" style="margin-top:6px">📝 ${escapeHtml(c.notas)}</div>` : ""}
+        ${alerta}
       </div>
       <div class="big-saldo">
         <div class="lbl">Saldo actual</div>
-        <div class="amt ${cls}">${money(saldo)}</div>
-        <div class="hint">${saldo > 0.005 ? "El cliente debe" : saldo < -0.005 ? "Saldo a favor del cliente" : "Cuenta saldada"}</div>
+        <div class="amt ${cls}">${money(t.saldo)}</div>
+        <div class="hint">${t.saldo > 0.005 ? "El cliente debe" : t.saldo < -0.005 ? "Saldo a favor del cliente" : "Cuenta saldada"}</div>
       </div>
     </div>
-
-    <div class="movs-actions" style="margin:16px 0 12px">
+    <div class="mini-cards">
+      <div class="mini">Total cargos<b style="color:var(--debe)">${money(t.debe)}</b></div>
+      <div class="mini">Total pagos<b style="color:var(--haber)">${money(t.haber)}</b></div>
+    </div>
+    <div class="movs-actions" style="margin:6px 0 12px">
       <button class="primary" onclick="abrirModalMov()">＋ Registrar movimiento</button>
       <button class="ghost" onclick="window.print()">🖨 Imprimir estado</button>
+      <button class="ghost" onclick="exportarCSV('${c.id}')">⭳ CSV</button>
       <button class="ghost" onclick="editarCliente('${c.id}')">✎ Editar datos</button>
-      <button class="danger" onclick="borrarCliente('${c.id}')">🗑 Eliminar cliente</button>
+      <button class="danger" onclick="borrarCliente('${c.id}')">🗑 Eliminar</button>
     </div>
-
-    ${movs.length === 0
-      ? `<div class="empty">Sin movimientos. Registrá el primero.</div>`
+    ${movs.length === 0 ? `<div class="empty">Sin movimientos. Registrá el primero.</div>`
       : `<div style="overflow-x:auto"><table>
           <thead><tr><th>Fecha</th><th>Concepto</th><th class="num">Debe (cargo)</th><th class="num">Haber (pago)</th><th class="num">Saldo</th><th></th></tr></thead>
           <tbody>${filas}</tbody>
-        </table></div>`
-    }
+          <tfoot><tr><th></th><th>Totales</th><th class="num" style="color:var(--debe)">${money(t.debe)}</th><th class="num" style="color:var(--haber)">${money(t.haber)}</th><th class="num">${money(t.saldo)}</th><th></th></tr></tfoot>
+        </table></div>`}
   `;
 }
 
 /* ====================== CRUD Cliente ====================== */
-let editandoCliente = null;
 function abrirModalCliente() {
   editandoCliente = null;
   document.getElementById("tituloCliente").textContent = "Nuevo cliente";
-  ["cNombre", "cTel", "cLoc", "cNotas"].forEach(id => document.getElementById(id).value = "");
-  abrir("modalCliente");
-  setTimeout(() => document.getElementById("cNombre").focus(), 50);
+  ["cNombre", "cTel", "cLoc", "cNotas", "cLimite"].forEach(id => document.getElementById(id).value = "");
+  abrir("modalCliente"); setTimeout(() => document.getElementById("cNombre").focus(), 50);
 }
 function editarCliente(id) {
   const c = db.clientes.find(x => x.id === id); if (!c) return;
@@ -429,6 +428,7 @@ function editarCliente(id) {
   document.getElementById("cNombre").value = c.nombre;
   document.getElementById("cTel").value = c.tel || "";
   document.getElementById("cLoc").value = c.localidad || "";
+  document.getElementById("cLimite").value = c.limite || "";
   document.getElementById("cNotas").value = c.notas || "";
   abrir("modalCliente");
 }
@@ -436,19 +436,13 @@ function guardarCliente() {
   const nombre = document.getElementById("cNombre").value.trim();
   if (!nombre) { alert("El nombre es obligatorio."); return; }
   const datos = {
-    nombre,
-    tel: document.getElementById("cTel").value.trim(),
+    nombre, tel: document.getElementById("cTel").value.trim(),
     localidad: document.getElementById("cLoc").value.trim(),
+    limite: parseFloat(document.getElementById("cLimite").value) || 0,
     notas: document.getElementById("cNotas").value.trim(),
   };
-  if (editandoCliente) {
-    const c = db.clientes.find(x => x.id === editandoCliente);
-    Object.assign(c, datos);
-  } else {
-    const nuevo = { id: uid(), ...datos, movs: [] };
-    db.clientes.push(nuevo);
-    clienteSel = nuevo.id;
-  }
+  if (editandoCliente) { Object.assign(db.clientes.find(x => x.id === editandoCliente), datos); }
+  else { const nuevo = { id: uid(), ...datos, movs: [] }; db.clientes.push(nuevo); clienteSel = nuevo.id; }
   guardar(); cerrar("modalCliente"); render();
 }
 function borrarCliente(id) {
@@ -467,26 +461,37 @@ function setTipo(t) {
 }
 function abrirModalMov() {
   if (!clienteSel) return;
+  editandoMov = null;
+  document.getElementById("tituloMov").textContent = "Nuevo movimiento";
   setTipo("debe");
   document.getElementById("mFecha").value = hoy();
   document.getElementById("mImporte").value = "";
   document.getElementById("mConcepto").value = "";
+  abrir("modalMov"); setTimeout(() => document.getElementById("mImporte").focus(), 50);
+}
+function editarMov(id) {
+  const c = db.clientes.find(x => x.id === clienteSel); if (!c) return;
+  const m = (c.movs || []).find(x => x.id === id); if (!m) return;
+  editandoMov = id;
+  document.getElementById("tituloMov").textContent = "Editar movimiento";
+  setTipo(m.tipo);
+  document.getElementById("mFecha").value = m.fecha || hoy();
+  document.getElementById("mImporte").value = m.importe;
+  document.getElementById("mConcepto").value = m.concepto || "";
   abrir("modalMov");
-  setTimeout(() => document.getElementById("mImporte").focus(), 50);
 }
 function guardarMov() {
   const c = db.clientes.find(x => x.id === clienteSel); if (!c) return;
   const importe = parseFloat(document.getElementById("mImporte").value);
   if (isNaN(importe) || importe <= 0) { alert("Ingresá un importe válido mayor a 0."); return; }
   c.movs = c.movs || [];
-  c.movs.push({
-    id: uid(),
+  const datos = {
     fecha: document.getElementById("mFecha").value || hoy(),
     concepto: document.getElementById("mConcepto").value.trim(),
-    importe: Math.round(importe * 100) / 100,
-    tipo: tipoMov,
-    orden: c.movs.length,
-  });
+    importe: Math.round(importe * 100) / 100, tipo: tipoMov,
+  };
+  if (editandoMov) { Object.assign(c.movs.find(m => m.id === editandoMov), datos); }
+  else { c.movs.push({ id: uid(), ...datos, orden: c.movs.length }); }
   guardar(); cerrar("modalMov"); render();
 }
 function borrarMov(id) {
@@ -496,15 +501,49 @@ function borrarMov(id) {
   guardar(); render();
 }
 
-/* ====================== Backup / Import ====================== */
-function exportar() {
-  const blob = new Blob([JSON.stringify(db, null, 2)], { type: "application/json" });
+/* ====================== Configuración / Tema ====================== */
+function abrirConfig() {
+  document.getElementById("gTitulo").value = db.config.titulo;
+  document.getElementById("gSub").value = db.config.sub;
+  document.getElementById("gLogo").value = db.config.logo;
+  document.getElementById("gMoneda").value = db.config.moneda;
+  abrir("modalConfig");
+}
+function guardarConfig() {
+  db.config.titulo = document.getElementById("gTitulo").value.trim() || "Panel Ctas Ctes";
+  db.config.sub = document.getElementById("gSub").value.trim();
+  db.config.logo = (document.getElementById("gLogo").value.trim() || "CC").toUpperCase();
+  db.config.moneda = document.getElementById("gMoneda").value.trim() || "$";
+  guardar(); cerrar("modalConfig"); aplicarConfig(); render();
+}
+function aplicarConfig() {
+  document.getElementById("tituloNegocio").textContent = db.config.titulo;
+  document.getElementById("subNegocio").textContent = db.config.sub;
+  document.getElementById("logoBox").textContent = db.config.logo;
+  document.title = `${db.config.titulo} 2026 · v2.0`;
+}
+function toggleTema() {
+  db.config.tema = db.config.tema === "dark" ? "light" : "dark";
+  aplicarTema(); guardar();
+}
+function aplicarTema() {
+  document.documentElement.setAttribute("data-theme", db.config.tema);
+  document.getElementById("btnTema").textContent = db.config.tema === "dark" ? "🌙" : "☀️";
+}
+function borrarTodo() {
+  if (!confirm("¿Borrar TODOS los datos (clientes y movimientos)? Esta acción no se puede deshacer.\n\nSugerencia: hacé un Backup antes.")) return;
+  if (!confirm("Confirmá una vez más: se perderá toda la información.")) return;
+  db = estadoInicial(); clienteSel = null; guardar(); cerrar("modalConfig"); aplicarConfig(); aplicarTema(); render();
+}
+
+/* ====================== Backup / Import / CSV ====================== */
+function descargar(nombre, contenido, tipo) {
+  const blob = new Blob([contenido], { type: tipo });
   const a = document.createElement("a");
-  a.href = URL.createObjectURL(blob);
-  a.download = `ctas-ctes-backup-${hoy()}.json`;
-  a.click();
+  a.href = URL.createObjectURL(blob); a.download = nombre; a.click();
   URL.revokeObjectURL(a.href);
 }
+function exportar() { descargar(`ctas-ctes-backup-${hoy()}.json`, JSON.stringify(db, null, 2), "application/json"); }
 function importar(ev) {
   const file = ev.target.files[0]; if (!file) return;
   const reader = new FileReader();
@@ -513,26 +552,38 @@ function importar(ev) {
       const data = JSON.parse(reader.result);
       if (!data || !Array.isArray(data.clientes)) throw new Error("Formato inválido");
       if (!confirm(`Se importarán ${data.clientes.length} clientes y se reemplazarán los datos actuales. ¿Continuar?`)) return;
-      db = data; clienteSel = null; guardar(); render();
+      db = migrar(data); clienteSel = null; guardar(); aplicarConfig(); aplicarTema(); render();
       alert("Datos importados correctamente.");
     } catch (e) { alert("No se pudo importar: archivo inválido."); }
     ev.target.value = "";
   };
   reader.readAsText(file);
 }
+function exportarCSV(id) {
+  const c = db.clientes.find(x => x.id === id); if (!c) return;
+  const rows = [["Fecha", "Concepto", "Debe", "Haber", "Saldo"]];
+  let acum = 0;
+  movsOrdenados(c).forEach(m => {
+    acum += (m.tipo === "debe" ? m.importe : -m.importe);
+    rows.push([fechaCorta(m.fecha), (m.concepto || "").replace(/"/g, '""'),
+      m.tipo === "debe" ? m.importe.toFixed(2) : "", m.tipo === "haber" ? m.importe.toFixed(2) : "", acum.toFixed(2)]);
+  });
+  const csv = "﻿" + rows.map(r => r.map(v => `"${v}"`).join(";")).join("\r\n");
+  const safe = c.nombre.replace(/[^\w\s-]/g, "").trim().replace(/\s+/g, "_");
+  descargar(`cta-cte-${safe || "cliente"}-${hoy()}.csv`, csv, "text/csv;charset=utf-8");
+}
 
 /* ====================== Helpers UI ====================== */
 function abrir(id) { document.getElementById(id).classList.add("show"); }
 function cerrar(id) { document.getElementById(id).classList.remove("show"); }
 function escapeHtml(s) { return (s || "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])); }
-
 document.querySelectorAll(".modal-bg").forEach(bg => bg.addEventListener("click", e => { if (e.target === bg) bg.classList.remove("show"); }));
 document.addEventListener("keydown", e => { if (e.key === "Escape") document.querySelectorAll(".modal-bg.show").forEach(m => m.classList.remove("show")); });
 
 /* ====================== Render principal ====================== */
 function render() { renderCards(); renderClientes(); renderDetalle(); }
 document.getElementById("anio").textContent = new Date().getFullYear();
-render();
+aplicarConfig(); aplicarTema(); render();
 </script>
 </body>
 </html>
